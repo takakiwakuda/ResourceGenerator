@@ -43,7 +43,7 @@ Describe "ResourceGenerator" {
             $files[1].Name | Should -BeExactly "Resources.Designer.cs"
         }
 
-        It "Should create resource files with GlobalClass" {
+        It "Should create resource files with PublicClass" {
             $params = @{
                 ResourceList    = @{
                     Foo = "Foo"
@@ -52,7 +52,7 @@ Describe "ResourceGenerator" {
                 OutputDirectory = $TestDrive
                 Namespace       = "Foo.Properties"
                 TypeName        = "Resources"
-                GlobalClass     = $true
+                PublicClass     = $true
             }
 
             $files = New-ResourceFile @params
@@ -154,13 +154,13 @@ Describe "ResourceGenerator" {
             $files[1].Name | Should -BeExactly "Resources.Designer.cs"
         }
 
-        It "Should create resource files with GlobalClass" {
+        It "Should create resource files with PublicClass" {
             $params = @{
                 Path            = $FooFile
                 OutputDirectory = $TestDrive
                 Namespace       = "Foo.Properties"
                 TypeName        = "Resources"
-                GlobalClass     = $true
+                PublicClass     = $true
                 ErrorAction     = [ActionPreference]::Ignore
             }
 

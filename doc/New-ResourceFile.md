@@ -16,13 +16,13 @@ Creates `.resx` and `.Designer.cs` files.
 ### ResourceList (Default)
 
 ```powershell
-New-ResourceFile [-ResourceList] <IDictionary> [-OutputDirectory] <String> [-Namespace] <String> [-TypeName] <String> [-GlobalClass] [<CommonParameters>]
+New-ResourceFile [-ResourceList] <IDictionary> [-OutputDirectory] <String> [-Namespace] <String> [-TypeName] <String> [-PublicClass] [<CommonParameters>]
 ```
 
 ### Path
 
 ```powershell
-New-ResourceFile [-Path] <String> [-OutputDirectory] <String> [-Namespace] <String> [-TypeName] <String> [-GlobalClass] [<CommonParameters>]
+New-ResourceFile [-Path] <String> [-OutputDirectory] <String> [-Namespace] <String> [-TypeName] <String> [-PublicClass] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -48,22 +48,6 @@ PS C:\> New-ResourceFile -Path 'C:\Projects\Resources.txt' -OutputDirectory 'C:\
 This example creates `Resources.resx` and `Resources.Designer.cs` files in the specified directory `C:\Projects`.
 
 ## PARAMETERS
-
-### -GlobalClass
-
-Indicates that the resource to be created is a global class.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Namespace
 
@@ -108,6 +92,22 @@ Aliases:
 
 Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PublicClass
+
+Indicates that the resource to be created is a public class.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -61,10 +61,10 @@ public sealed class NewResourceFileCommand : PSCmdlet
     public string TypeName { get; set; }
 
     /// <summary>
-    /// GlobalClass parameter
+    /// PublicClass parameter
     /// </summary>
     [Parameter()]
-    public SwitchParameter GlobalClass { get; set; }
+    public SwitchParameter PublicClass { get; set; }
 
     /// <summary>
     /// ProcessRecord() override.
@@ -213,7 +213,7 @@ public sealed class NewResourceFileCommand : PSCmdlet
             TypeName,
             Namespace,
             provider,
-            !GlobalClass.IsPresent,
+            !PublicClass.IsPresent,
             out string[] unmatchable
         );
 
