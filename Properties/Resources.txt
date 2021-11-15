@@ -1,0 +1,5 @@
+EmptyResourceList=There are no key-value pairs in the ResourceList.
+InvalidFormatFile=There are no valid key-value pairs in the file '{0}'.
+InvalidKeyValuePair=The line read '{0}' is not a key-value pair.
+PathNotFound=Cannot find path '{0}' because it does not exist.
+NotFileSystemProvider=The path '{0}' is not a file system provider.
