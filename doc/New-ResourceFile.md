@@ -1,7 +1,7 @@
 ---
 external help file: ResourceGenerator.dll-Help.xml
 Module Name: ResourceGenerator
-online version:
+online version: https://github.com/takakiwakuda/ResourceGenerator/blob/main/doc/New-ResourceFile.md
 schema: 2.0.0
 ---
 

@@ -98,10 +98,10 @@
             # Tags = @()
 
             # A URL to the license for this module.
-            LicenseUri = ''
+            LicenseUri = 'https://github.com/takakiwakuda/ResourceGenerator/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri = ''
+            ProjectUri = 'https://github.com/takakiwakuda/ResourceGenerator'
 
             # A URL to an icon representing this module.
             # IconUri = ''

@@ -83,4 +83,4 @@ task . Build, PackUp
 .SYNOPSIS
     Run Build and Test.
 #>
-task BuildAndTest Build, Test
+task BuildAndTest Build, PackUp, Test

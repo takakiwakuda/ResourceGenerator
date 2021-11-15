@@ -16,7 +16,8 @@ namespace ResourceGenerator;
 /// <summary>
 /// New-ResourceFile cmdlet creates .resx and .Designer.cs files.
 /// </summary>
-[Cmdlet(VerbsCommon.New, "ResourceFile", DefaultParameterSetName = ResourceListSetName)]
+[Cmdlet(VerbsCommon.New, "ResourceFile", DefaultParameterSetName = ResourceListSetName,
+HelpUri = "https://github.com/takakiwakuda/ResourceGenerator/blob/main/doc/New-ResourceFile.md")]
 [OutputType(typeof(FileInfo))]
 public sealed class NewResourceFileCommand : PSCmdlet
 {
