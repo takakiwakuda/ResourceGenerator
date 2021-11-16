@@ -123,6 +123,9 @@
   <data name="FileAlreadyExists" xml:space="preserve">
     <value>The file '{0}' already exists. It able to be overwritten with the Force parameter.</value>
   </data>
+  <data name="GeneratingFile" xml:space="preserve">
+    <value>Generating file '{0}'.</value>
+  </data>
   <data name="InvalidFormatFile" xml:space="preserve">
     <value>There are no valid key-value pairs in the file '{0}'.</value>
   </data>

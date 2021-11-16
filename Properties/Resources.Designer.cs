@@ -79,6 +79,15 @@ namespace ResourceGenerator.Properties {
         }
         
         /// <summary>
+        ///   Generating file &apos;{0}&apos;. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string GeneratingFile {
+            get {
+                return ResourceManager.GetString("GeneratingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   There are no valid key-value pairs in the file &apos;{0}&apos;. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InvalidFormatFile {

@@ -56,7 +56,7 @@ task ResGen @{
         $ipmo = "Import-Module -Name '$PSScriptRoot\out\$Configuration\net48\ResourceGenerator'"
         $source = "$PSScriptRoot\Properties\Resources.txt"
         $output = "$PSScriptRoot\Properties"
-        $command = "& { $ipmo; New-ResourceFile '$source' '$output' ResourceGenerator.Properties Resources }"
+        $command = "& { $ipmo; New-ResourceFile '$source' '$output' ResourceGenerator.Properties Resources -Force }"
 
         exec { powershell -Command $command }
     }

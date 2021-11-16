@@ -105,12 +105,14 @@ public sealed class NewResourceFileCommand : PSCmdlet
         string resxFileName = System.IO.Path.Combine(OutputDirectory, TypeName + ".resx");
         if (CanGenerate(resxFileName))
         {
+            WriteVerbose(string.Format(Resources.GeneratingFile, resxFileName));
             GenerateResXResource(resxFileName);
         }
 
         string csharpFileName = System.IO.Path.Combine(OutputDirectory, TypeName + ".Designer.cs");
         if (CanGenerate(csharpFileName))
         {
+            WriteVerbose(string.Format(Resources.GeneratingFile, csharpFileName));
             GenerateResXDesigner(resxFileName, csharpFileName);
         }
 
