@@ -12,7 +12,7 @@
     RootModule             = 'ResourceGenerator.psm1'
 
     # Version number of this module.
-    ModuleVersion          = '1.0.1'
+    ModuleVersion          = '1.1.0'
 
     # Supported PSEditions
     CompatiblePSEditions   = @('Desktop')
@@ -98,16 +98,16 @@
             # Tags = @()
 
             # A URL to the license for this module.
-            LicenseUri = 'https://github.com/takakiwakuda/ResourceGenerator/blob/main/LICENSE'
+            LicenseUri   = 'https://github.com/takakiwakuda/ResourceGenerator/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri = 'https://github.com/takakiwakuda/ResourceGenerator'
+            ProjectUri   = 'https://github.com/takakiwakuda/ResourceGenerator'
 
             # A URL to an icon representing this module.
             # IconUri = ''
 
             # ReleaseNotes of this module
-            # ReleaseNotes = ''
+            ReleaseNotes = 'Adds the Force parameter to indicate that existing resource files are overwritten.'
 
             # Prerelease string of this module
             # Prerelease = ''

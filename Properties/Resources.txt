@@ -1,4 +1,5 @@
 EmptyResourceList=There are no key-value pairs in the ResourceList.
+FileAlreadyExists=The file '{0}' already exists. It able to be overwritten with the Force parameter.
 InvalidFormatFile=There are no valid key-value pairs in the file '{0}'.
 InvalidKeyValuePair=The line read '{0}' is not a key-value pair.
 PathNotFound=Cannot find path '{0}' because it does not exist.

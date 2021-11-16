@@ -70,6 +70,15 @@ namespace ResourceGenerator.Properties {
         }
         
         /// <summary>
+        ///   The file &apos;{0}&apos; already exists. It able to be overwritten with the Force parameter. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string FileAlreadyExists {
+            get {
+                return ResourceManager.GetString("FileAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   There are no valid key-value pairs in the file &apos;{0}&apos;. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InvalidFormatFile {

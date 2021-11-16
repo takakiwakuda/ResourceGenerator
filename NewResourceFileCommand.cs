@@ -67,6 +67,13 @@ public sealed class NewResourceFileCommand : PSCmdlet
     public SwitchParameter PublicClass { get; set; }
 
     /// <summary>
+    /// Force parameter
+    /// </summary>
+    [Parameter()]
+    [Alias("Overwrite")]
+    public SwitchParameter Force { get; set; }
+
+    /// <summary>
     /// ProcessRecord() override.
     /// </summary>
     protected override void ProcessRecord()
@@ -96,12 +103,34 @@ public sealed class NewResourceFileCommand : PSCmdlet
         OutputDirectory = ResolveFilePath(OutputDirectory);
 
         string resxFileName = System.IO.Path.Combine(OutputDirectory, TypeName + ".resx");
-        GenerateResXResource(resxFileName);
+        if (CanGenerate(resxFileName))
+        {
+            GenerateResXResource(resxFileName);
+        }
 
         string csharpFileName = System.IO.Path.Combine(OutputDirectory, TypeName + ".Designer.cs");
-        GenerateResXDesigner(resxFileName, csharpFileName);
+        if (CanGenerate(csharpFileName))
+        {
+            GenerateResXDesigner(resxFileName, csharpFileName);
+        }
 
         WriteObject(SessionState.InvokeProvider.Item.Get(new string[] { resxFileName, csharpFileName }, false, true), true);
+    }
+
+    /// <summary>
+    /// Checks if a file able to be generated with the specified path.
+    /// </summary>
+    /// <param name="path">Path to check</param>
+    /// <returns>true if the file able to be generated; otherwise false</returns>
+    private bool CanGenerate(string path)
+    {
+        if (Force || !File.Exists(path))
+        {
+            return true;
+        }
+
+        WriteWarning(string.Format(Resources.FileAlreadyExists, path));
+        return false;
     }
 
     /// <summary>

@@ -12,6 +12,10 @@ Describe "ResourceGenerator" {
         $EmptyFile = New-Item -Path $TestDrive\Empty.txt -ItemType File
     }
 
+    AfterEach {
+        Remove-Item -Path $TestDrive\*.resx, $TestDrive\*.Designer.cs
+    }
+
     Context "New-ResourceFile.ResourceList" {
         It "Throws an exception if the path in Path does not exist" {
             $params = @{

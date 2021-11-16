@@ -16,13 +16,13 @@ Creates `.resx` and `.Designer.cs` files.
 ### ResourceList (Default)
 
 ```powershell
-New-ResourceFile [-ResourceList] <IDictionary> [-OutputDirectory] <String> [-Namespace] <String> [-TypeName] <String> [-PublicClass] [<CommonParameters>]
+New-ResourceFile [-ResourceList] <IDictionary> [-OutputDirectory] <String> [-Namespace] <String> [-TypeName] <String> [-PublicClass] [-Force] [<CommonParameters>]
 ```
 
 ### Path
 
 ```powershell
-New-ResourceFile [-Path] <String> [-OutputDirectory] <String> [-Namespace] <String> [-TypeName] <String> [-PublicClass] [<CommonParameters>]
+New-ResourceFile [-Path] <String> [-OutputDirectory] <String> [-Namespace] <String> [-TypeName] <String> [-PublicClass] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -48,6 +48,22 @@ PS C:\> New-ResourceFile -Path 'C:\Projects\Resources.txt' -OutputDirectory 'C:\
 This example creates `Resources.resx` and `Resources.Designer.cs` files in the specified directory `C:\Projects`.
 
 ## PARAMETERS
+
+### -Force
+
+Indicates that existing resource files are overwritten.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: Overwrite
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Namespace
 
