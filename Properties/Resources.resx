@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EmptyResourceList" xml:space="preserve">
-    <value>There are no key-value pairs in the ResourceList.</value>
+    <value>There are no key-value pairs in the ResourceList parameter.</value>
   </data>
   <data name="FileAlreadyExists" xml:space="preserve">
     <value>The file '{0}' already exists. It able to be overwritten with the Force parameter.</value>
@@ -136,6 +136,6 @@
     <value>Cannot find path '{0}' because it does not exist.</value>
   </data>
   <data name="NotFileSystemProvider" xml:space="preserve">
-    <value>The path '{0}' is not a file system provider.</value>
+    <value>The current provider '{0}' is not supported.</value>
   </data>
 </root>

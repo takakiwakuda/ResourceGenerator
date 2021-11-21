@@ -1,10 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Copyright>(c) Takaki Wakuda.</Copyright>
+    <Copyright>(c) Takaki Wakuda. All rights reserved.</Copyright>
     <TargetFramework>net48</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,14 +20,12 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
-      <!-- <Generator>ResXFileCodeGenerator</Generator> -->
-      <!-- <LastGenOutput>Properties\Resources.Designer.cs</LastGenOutput> -->
       <LogicalName>ResourceGenerator.Properties.Resources.resources</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <None Include="ResourceGenerator.psd1" CopyToOutputDirectory="PreserveNewest" />
-    <None Include="ResourceGenerator.psm1" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+
 </Project>

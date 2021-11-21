@@ -1,26 +1,57 @@
 ﻿[CmdletBinding()]
 param (
+    # Specifies the build configuration. The default is Debug.
     [Parameter()]
     [ValidateSet("Debug", "Release")]
     [string]
     $Configuration = "Debug"
 )
 
+#region Variables
+$ModuleVersion = (Import-PowerShellDataFile -LiteralPath ResourceGenerator.psd1).ModuleVersion
+$Module = "$PSScriptRoot\out\$Configuration\ResourceGenerator"
+$OutputPath = "$Module\$ModuleVersion"
+#endregion
+
 <#
 .SYNOPSIS
-    Run "dotnet build".
+    Runs the build of the ResourceGenerator project.
 #>
 task Build @{
     Inputs  = Get-ChildItem -Path *.cs, *.csproj
-    Outputs = "bin\$Configuration\net48\ResourceGenerator.dll"
+    Outputs = "bin\$Configuration\ResourceGenerator.dll"
     Jobs    = {
-        exec { dotnet build -c $Configuration }
+        exec { dotnet build --nologo -c $Configuration }
     }
 }
 
 <#
 .SYNOPSIS
-    Remove bin, obj, and out directories and thier sub-items.
+    Runs the build of the ResourceGenerator module.
+#>
+task BuildModule @{
+    Inputs  = "bin\$Configuration\ResourceGenerator.dll"
+    Outputs = "$OutputPath\ResourceGenerator.dll"
+    Jobs    = {
+        if (Test-Path -LiteralPath $OutputPath -PathType Container) {
+            Remove-Item -Path $OutputPath\* -Recurse
+        }
+        else {
+            $null = New-Item -Path $OutputPath -ItemType Directory
+        }
+
+        $params = @{
+            Path        = "bin\$Configuration\ResourceGenerator.*", "en-US", "ja-JP"
+            Destination = $OutputPath
+            Recurse     = $true
+        }
+        Copy-Item @params
+    }
+}
+
+<#
+.SYNOPSIS
+    Removes bin, obj, and out directories and thier sub-items.
 #>
 task Clean {
     remove bin, obj, out
@@ -28,59 +59,34 @@ task Clean {
 
 <#
 .SYNOPSIS
-    Compile PowerShell module.
-#>
-task PackUp {
-    $manifest = "bin\$Configuration\net48\ResourceGenerator.psd1"
-    $version = (Import-PowerShellDataFile -LiteralPath $manifest).ModuleVersion
-    $output = "out\$Configuration\net48\ResourceGenerator\$version"
-
-    if (Test-Path -LiteralPath $output) {
-        Remove-Item -Path $output\* -Recurse
-    }
-    else {
-        $null = New-Item -Path $output -ItemType Directory
-    }
-
-    Copy-Item -Path bin\$Configuration\net48\ResourceGenerator.*, en-US, ja-JP -Destination $output -Recurse
-}
-
-<#
-.SYNOPSIS
-    Generate resource files.
+    Generates resources for the ResourceGenerator project.
 #>
 task ResGen @{
     Inputs  = "Properties\Resources.txt"
     Outputs = "Properties\Resources.Designer.cs"
     Jobs    = {
-        $ipmo = "Import-Module -Name '$PSScriptRoot\out\$Configuration\net48\ResourceGenerator'"
+        $ipmo = "Import-Module -Name '$Module'"
         $source = "$PSScriptRoot\Properties\Resources.txt"
         $output = "$PSScriptRoot\Properties"
         $command = "& { $ipmo; New-ResourceFile '$source' '$output' ResourceGenerator.Properties Resources -Force }"
 
-        exec { powershell -Command $command }
+        exec { powershell -NoProfile -Command $command }
     }
 }
 
 <#
 .SYNOPSIS
-    Run tests for PowerShell module.
+    Runs the test of the ResourceGenerator module.
 #>
 task Test {
-    $module = "$PSScriptRoot\out\$Configuration\net48\ResourceGenerator"
-    $command = "& { Import-Module -Name '$module'; Invoke-Pester -Path '$PSScriptRoot\test' }"
+    $ipmo = "Import-Module -Name '$Module'"
+    $command = "& { $ipmo; Invoke-Pester -Path '$PSScriptRoot\test' -Output Detailed }"
 
-    exec { powershell -Command $command }
+    exec { powershell -NoProfile -Command $command }
 }
 
 <#
 .SYNOPSIS
-    Run Build.
+    Runs build tasks.
 #>
-task . Build, PackUp
-
-<#
-.SYNOPSIS
-    Run Build and Test.
-#>
-task BuildAndTest Build, PackUp, Test
+task . Build, BuildModule

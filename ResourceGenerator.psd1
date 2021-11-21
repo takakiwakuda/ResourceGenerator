@@ -9,10 +9,10 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    RootModule             = 'ResourceGenerator.psm1'
+    RootModule             = 'ResourceGenerator.dll'
 
     # Version number of this module.
-    ModuleVersion          = '1.1.1'
+    ModuleVersion          = '2.0.0'
 
     # Supported PSEditions
     CompatiblePSEditions   = @('Desktop')
@@ -30,7 +30,7 @@
     Copyright              = '(c) Takaki Wakuda. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description            = 'Creates .resx and .Designer.cs files.'
+    Description            = 'Creates resources for .NET application and assemblies.'
 
     # Minimum version of the PowerShell engine required by this module
     PowerShellVersion      = '5.1'
@@ -66,13 +66,13 @@
     # FormatsToProcess = @()
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-    NestedModules          = @('ResourceGenerator.dll')
+    # NestedModules = @()
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
     # FunctionsToExport = @()
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-    CmdletsToExport        = 'New-ResourceFile'
+    CmdletsToExport        = @('New-ResourceFile')
 
     # Variables to export from this module
     # VariablesToExport = @()
@@ -107,7 +107,7 @@
             # IconUri = ''
 
             # ReleaseNotes of this module
-            ReleaseNotes = 'Adds the Force parameter to indicate that existing resource files are overwritten.'
+            ReleaseNotes = 'Adds the ResourceType parameter to indicate the type of the resource file to create.'
 
             # Prerelease string of this module
             # Prerelease = ''

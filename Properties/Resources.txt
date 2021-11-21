@@ -1,7 +1,7 @@
-EmptyResourceList=There are no key-value pairs in the ResourceList.
+EmptyResourceList=There are no key-value pairs in the ResourceList parameter.
 FileAlreadyExists=The file '{0}' already exists. It able to be overwritten with the Force parameter.
 GeneratingFile=Generating file '{0}'.
 InvalidFormatFile=There are no valid key-value pairs in the file '{0}'.
 InvalidKeyValuePair=The line read '{0}' is not a key-value pair.
 PathNotFound=Cannot find path '{0}' because it does not exist.
-NotFileSystemProvider=The path '{0}' is not a file system provider.
+NotFileSystemProvider=The current provider '{0}' is not supported.

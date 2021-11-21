@@ -1,0 +1,3 @@
+Cat=Nuko
+Dog=Wanko
+HelloWorld=おはよう世界

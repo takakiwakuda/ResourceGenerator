@@ -61,7 +61,7 @@ namespace ResourceGenerator.Properties {
         }
         
         /// <summary>
-        ///   There are no key-value pairs in the ResourceList. に類似しているローカライズされた文字列を検索します。
+        ///   There are no key-value pairs in the ResourceList parameter. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string EmptyResourceList {
             get {
@@ -106,7 +106,7 @@ namespace ResourceGenerator.Properties {
         }
         
         /// <summary>
-        ///   The path &apos;{0}&apos; is not a file system provider. に類似しているローカライズされた文字列を検索します。
+        ///   The current provider &apos;{0}&apos; is not supported. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string NotFileSystemProvider {
             get {
