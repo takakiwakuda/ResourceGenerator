@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Diagnostics.CodeAnalysis
 {
+#if !NETCOREAPP3_0_OR_GREATER
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property, Inherited = false)]
     [DebuggerNonUserCode]
     [ExcludeFromCodeCoverage]
@@ -38,6 +39,7 @@ namespace System.Diagnostics.CodeAnalysis
     [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
     [DebuggerNonUserCode]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("csharp", "IDE0060")]
     internal sealed class MaybeNullWhenAttribute : Attribute
     {
         internal MaybeNullWhenAttribute(bool returnValue)
@@ -48,6 +50,7 @@ namespace System.Diagnostics.CodeAnalysis
     [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
     [DebuggerNonUserCode]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("csharp", "IDE0060")]
     internal sealed class NotNullWhenAttribute : Attribute
     {
         internal NotNullWhenAttribute(bool returnValue)
@@ -58,6 +61,7 @@ namespace System.Diagnostics.CodeAnalysis
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("csharp", "IDE0060")]
     internal sealed class NotNullIfNotNullAttribute : Attribute
     {
         internal NotNullIfNotNullAttribute(string parameterName)
@@ -65,9 +69,30 @@ namespace System.Diagnostics.CodeAnalysis
         }
     }
 
+    [AttributeUsage(AttributeTargets.Method, Inherited = false)]
+    [DebuggerNonUserCode]
+    [ExcludeFromCodeCoverage]
+    [SuppressMessage("csharp", "IDE0060")]
+    internal sealed class DoesNotReturnAttribute : Attribute
+    {
+    }
+
+    [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
+    [DebuggerNonUserCode]
+    [ExcludeFromCodeCoverage]
+    [SuppressMessage("csharp", "IDE0060")]
+    internal sealed class DoesNotReturnIfAttribute : Attribute
+    {
+        internal DoesNotReturnIfAttribute(bool parameterValue)
+        {
+        }
+    }
+#endif
+
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("csharp", "IDE0060")]
     internal sealed class MemberNotNullAttribute : Attribute
     {
         internal MemberNotNullAttribute(string member)
@@ -82,6 +107,7 @@ namespace System.Diagnostics.CodeAnalysis
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("csharp", "IDE0060")]
     internal sealed class MemberNotNullWhenAttribute : Attribute
     {
         internal MemberNotNullWhenAttribute(bool returnValue, string member)
@@ -89,23 +115,6 @@ namespace System.Diagnostics.CodeAnalysis
         }
 
         internal MemberNotNullWhenAttribute(bool returnValue, params string[] members)
-        {
-        }
-    }
-
-    [AttributeUsage(AttributeTargets.Method, Inherited = false)]
-    [DebuggerNonUserCode]
-    [ExcludeFromCodeCoverage]
-    internal sealed class DoesNotReturnAttribute : Attribute
-    {
-    }
-
-    [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
-    [DebuggerNonUserCode]
-    [ExcludeFromCodeCoverage]
-    internal sealed class DoesNotReturnIfAttribute : Attribute
-    {
-        internal DoesNotReturnIfAttribute(bool parameterValue)
         {
         }
     }

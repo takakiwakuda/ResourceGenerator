@@ -145,14 +145,11 @@ namespace ResourceGenerator
             }
 
             OutputDirectory = ResolveFilePath(OutputDirectory);
-            string binaryFileName = System.IO.Path.Combine(OutputDirectory, TypeName + ".resources");
-            string csharpFileName = System.IO.Path.Combine(OutputDirectory, TypeName + ".Designer.cs");
-            string resxFileName = System.IO.Path.Combine(OutputDirectory, TypeName + ".resx");
-
             List<string> fileNames = new();
 
             if (ResourceType.HasFlag(ResourceType.Xml))
             {
+                string resxFileName = System.IO.Path.Combine(OutputDirectory, TypeName + ".resx");
                 if (CanGenerateFile(resxFileName))
                 {
                     WriteVerbose(string.Format(Resources.GeneratingFile, resxFileName));
@@ -163,6 +160,7 @@ namespace ResourceGenerator
 
             if (ResourceType.HasFlag(ResourceType.CSharp))
             {
+                string csharpFileName = System.IO.Path.Combine(OutputDirectory, TypeName + ".Designer.cs");
                 if (CanGenerateFile(csharpFileName))
                 {
                     WriteVerbose(string.Format(Resources.GeneratingFile, csharpFileName));
@@ -173,6 +171,7 @@ namespace ResourceGenerator
 
             if (ResourceType.HasFlag(ResourceType.Binary))
             {
+                string binaryFileName = System.IO.Path.Combine(OutputDirectory, TypeName + ".resources");
                 if (CanGenerateFile(binaryFileName))
                 {
                     WriteVerbose(string.Format(Resources.GeneratingFile, binaryFileName));
