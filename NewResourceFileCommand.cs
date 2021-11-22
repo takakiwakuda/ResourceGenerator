@@ -36,6 +36,11 @@ namespace ResourceGenerator
         Xml = 4,
 
         /// <summary>
+        /// The resource type are text files that contains CSharp and XML resources.
+        /// </summary>
+        Text = CSharp | Xml,
+
+        /// <summary>
         /// All types of resources.
         /// </summary>
         All = Binary | CSharp | Xml
@@ -97,7 +102,7 @@ namespace ResourceGenerator
         /// Gets or sets the ResourceType parameter.
         /// </summary>
         [Parameter]
-        public ResourceType ResourceType { get; set; } = ResourceType.All;
+        public ResourceType ResourceType { get; set; } = ResourceType.Text;
 
         /// <summary>
         /// Gets or sets the PublicClass parameter.
@@ -146,58 +151,34 @@ namespace ResourceGenerator
 
             List<string> fileNames = new();
 
-            // Following codes are lengthy...
-            switch (ResourceType)
+            if (ResourceType.HasFlag(ResourceType.Xml))
             {
-                case ResourceType.Binary:
-                    if (CanGenerateFile(binaryFileName))
-                    {
-                        WriteVerbose(string.Format(Resources.GeneratingFile, binaryFileName));
-                        GenerateBinaryResourceFile(binaryFileName);
-                    }
-                    fileNames.Add(binaryFileName);
-                    break;
+                if (CanGenerateFile(resxFileName))
+                {
+                    WriteVerbose(string.Format(Resources.GeneratingFile, resxFileName));
+                    GenerateResXResourceFile(resxFileName);
+                }
+                fileNames.Add(resxFileName);
+            }
 
-                case ResourceType.CSharp:
-                    if (CanGenerateFile(csharpFileName))
-                    {
-                        WriteVerbose(string.Format(Resources.GeneratingFile, csharpFileName));
-                        GenerateCSharpSourceFile(csharpFileName);
-                    }
-                    fileNames.Add(csharpFileName);
-                    break;
+            if (ResourceType.HasFlag(ResourceType.CSharp))
+            {
+                if (CanGenerateFile(csharpFileName))
+                {
+                    WriteVerbose(string.Format(Resources.GeneratingFile, csharpFileName));
+                    GenerateCSharpSourceFile(csharpFileName);
+                }
+                fileNames.Add(csharpFileName);
+            }
 
-                case ResourceType.Xml:
-                    if (CanGenerateFile(resxFileName))
-                    {
-                        WriteVerbose(string.Format(Resources.GeneratingFile, resxFileName));
-                        GenerateResXResourceFile(resxFileName);
-                    }
-                    fileNames.Add(resxFileName);
-                    break;
-
-                default:
-                    if (CanGenerateFile(resxFileName))
-                    {
-                        WriteVerbose(string.Format(Resources.GeneratingFile, resxFileName));
-                        GenerateResXResourceFile(resxFileName);
-                    }
-                    fileNames.Add(resxFileName);
-
-                    if (CanGenerateFile(csharpFileName))
-                    {
-                        WriteVerbose(string.Format(Resources.GeneratingFile, csharpFileName));
-                        GenerateCSharpSourceFile(resxFileName, csharpFileName);
-                    }
-                    fileNames.Add(csharpFileName);
-
-                    if (CanGenerateFile(binaryFileName))
-                    {
-                        WriteVerbose(string.Format(Resources.GeneratingFile, binaryFileName));
-                        GenerateBinaryResourceFile(binaryFileName);
-                    }
-                    fileNames.Add(binaryFileName);
-                    break;
+            if (ResourceType.HasFlag(ResourceType.Binary))
+            {
+                if (CanGenerateFile(binaryFileName))
+                {
+                    WriteVerbose(string.Format(Resources.GeneratingFile, binaryFileName));
+                    GenerateBinaryResourceFile(binaryFileName);
+                }
+                fileNames.Add(binaryFileName);
             }
 
             WriteObject(SessionState.InvokeProvider.Item.Get(fileNames.ToArray(), false, true), true);
@@ -339,7 +320,7 @@ namespace ResourceGenerator
         }
 
         /// <summary>
-        /// Generates resources in a C# source file from the specified XML file (.resx) to the specified path.
+        /// Generates resources in a C# source file from the specified XML resource file (.resx) to the specified path.
         /// </summary>
         /// <remarks>Only UTF-8 encoding is supported.</remarks>
         /// <param name="resxFileName">The XML resource file (.resx) to be read.</param>
@@ -368,7 +349,7 @@ namespace ResourceGenerator
         }
 
         /// <summary>
-        /// Generates resources in an XML file (.resx) to the specified path.
+        /// Generates resources in an XML resource file (.resx) to the specified path.
         /// </summary>
         /// <remarks>Only UTF-8 encoding is supported.</remarks>
         /// <param name="path">The file to generate.</param>

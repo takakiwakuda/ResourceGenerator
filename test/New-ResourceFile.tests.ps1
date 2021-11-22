@@ -36,11 +36,11 @@ Describe "New-ResourceFile" {
             }
 
             $files = New-ResourceFile @params
-            $files.Count | Should -Be 3
+            $files.Count | Should -Be 2
             $files | Should -BeOfType ([FileInfo])
             $files[0].Name | Should -BeExactly "Resources.resx"
             $files[1].Name | Should -BeExactly "Resources.Designer.cs"
-            $files[2].Name | Should -BeExactly "Resources.resources"
+            "TestDrive:\Resources.resources" | Should -Not -Exist
         }
 
         It "Should create resources with the PublicClass parameter" {
@@ -57,11 +57,11 @@ Describe "New-ResourceFile" {
             }
 
             $files = New-ResourceFile @params
-            $files.Count | Should -Be 3
+            $files.Count | Should -Be 2
             $files | Should -BeOfType ([FileInfo])
             $files[0].Name | Should -BeExactly "Resources.resx"
             $files[1].Name | Should -BeExactly "Resources.Designer.cs"
-            $files[2].Name | Should -BeExactly "Resources.resources"
+            "TestDrive:\Resources.resources" | Should -Not -Exist
             Select-String -Pattern "^    public class Resources {$" -LiteralPath $files[1] -Quiet | Should -BeTrue
         }
 
@@ -105,7 +105,7 @@ Describe "New-ResourceFile" {
             "TestDrive:\Resources.resources" | Should -Not -Exist
         }
 
-        It "Should create a binary source file (.resources)" {
+        It "Should create a binary resource file (.resources)" {
             $params = @{
                 ResourceList    = @{
                     Frog    = "Kitaku"
@@ -123,6 +123,48 @@ Describe "New-ResourceFile" {
             $file.Name | Should -BeExactly "Resources.resources"
             "TestDrive:\Resources.resx" | Should -Not -Exist
             "TestDrive:\Resources.Designer.cs" | Should -Not -Exist
+        }
+
+        It "Should create text files (.resx and .Designer.cs)" {
+            $params = @{
+                ResourceList    = @{
+                    Eggplant = "Tamago"
+                    Billion  = 1E+9
+                }
+                OutputDirectory = "TestDrive:"
+                Namespace       = "Test.Properties"
+                TypeName        = "Resources"
+                ResourceType    = "Text"
+            }
+
+            $files = New-ResourceFile @params
+            $files.Count | Should -Be 2
+            $files | Should -BeOfType ([FileInfo])
+            $files[0].Name | Should -BeExactly "Resources.resx"
+            $files[1].Name | Should -BeExactly "Resources.Designer.cs"
+            "TestDrive:\Resources.resources" | Should -Not -Exist
+        }
+
+        It "Should create all resources" {
+            $params = @{
+                ResourceList    = @{
+                    Umai    = "Oishi"
+                    Zero    = 0
+                    True    = $true
+                    Numbers = @(1, 2, 4, 8, 16, 32, 64, 128)
+                }
+                OutputDirectory = "TestDrive:"
+                Namespace       = "Test.Properties"
+                TypeName        = "Resources"
+                ResourceType    = "All"
+            }
+
+            $files = New-ResourceFile @params
+            $files.Count | Should -Be 3
+            $files | Should -BeOfType ([FileInfo])
+            $files[0].Name | Should -BeExactly "Resources.resx"
+            $files[1].Name | Should -BeExactly "Resources.Designer.cs"
+            $files[2].Name | Should -BeExactly "Resources.resources"
         }
     }
 
@@ -221,11 +263,11 @@ Describe "New-ResourceFile" {
             }
 
             $files = New-ResourceFile @params
-            $files.Count | Should -Be 3
+            $files.Count | Should -Be 2
             $files | Should -BeOfType ([FileInfo])
             $files[0].Name | Should -BeExactly "Resources.resx"
             $files[1].Name | Should -BeExactly "Resources.Designer.cs"
-            $files[2].Name | Should -BeExactly "Resources.resources"
+            "TestDrive:\Resources.resources" | Should -Not -Exist
         }
 
         It "Should create resources with the PublicClass parameter" {
@@ -238,12 +280,12 @@ Describe "New-ResourceFile" {
             }
 
             $files = New-ResourceFile @params
-            $files.Count | Should -Be 3
+            $files.Count | Should -Be 2
             $files | Should -BeOfType ([FileInfo])
             $files[0].Name | Should -BeExactly "Resources.resx"
             $files[1].Name | Should -BeExactly "Resources.Designer.cs"
+            "TestDrive:\Resources.resources" | Should -Not -Exist
             Select-String -Pattern "^    public class Resources {$" -LiteralPath $files[1] -Quiet | Should -BeTrue
-            $files[2].Name | Should -BeExactly "Resources.resources"
         }
 
         It "Should create an XML resource file (.resx)" {
@@ -280,7 +322,7 @@ Describe "New-ResourceFile" {
             "TestDrive:\Resources.resources" | Should -Not -Exist
         }
 
-        It "Should create a binary source file (.resources)" {
+        It "Should create a binary resource file (.resources)" {
             $params = @{
                 Path            = "$PSScriptRoot\Resources.txt"
                 OutputDirectory = "TestDrive:"
@@ -295,6 +337,40 @@ Describe "New-ResourceFile" {
             $file.Name | Should -BeExactly "Resources.resources"
             "TestDrive:\Resources.resx" | Should -Not -Exist
             "TestDrive:\Resources.Designer.cs" | Should -Not -Exist
+        }
+
+        It "Should create text files (.resx and .Designer.cs)" {
+            $params = @{
+                Path            = "$PSScriptRoot\Resources.txt"
+                OutputDirectory = "TestDrive:"
+                Namespace       = "Test.Properties"
+                TypeName        = "Resources"
+                ResourceType    = "Text"
+            }
+
+            $files = New-ResourceFile @params
+            $files.Count | Should -Be 2
+            $files | Should -BeOfType ([FileInfo])
+            $files[0].Name | Should -BeExactly "Resources.resx"
+            $files[1].Name | Should -BeExactly "Resources.Designer.cs"
+            "TestDrive:\Resources.resources" | Should -Not -Exist
+        }
+
+        It "Should create all resources" {
+            $params = @{
+                Path            = "$PSScriptRoot\Resources.txt"
+                OutputDirectory = "TestDrive:"
+                Namespace       = "Test.Properties"
+                TypeName        = "Resources"
+                ResourceType    = "All"
+            }
+
+            $files = New-ResourceFile @params
+            $files.Count | Should -Be 3
+            $files | Should -BeOfType ([FileInfo])
+            $files[0].Name | Should -BeExactly "Resources.resx"
+            $files[1].Name | Should -BeExactly "Resources.Designer.cs"
+            $files[2].Name | Should -BeExactly "Resources.resources"
         }
     }
 }
