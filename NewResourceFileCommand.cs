@@ -187,7 +187,7 @@ namespace ResourceGenerator
         /// Checks if a file able to be generated with the specified path.
         /// </summary>
         /// <param name="path">The file to test.</param>
-        /// <returns>true if a file able to be generated; otherwise, false.</returns>
+        /// <returns><see langword="true"/> if a file able to be generated; otherwise, <see langword="false"/>.</returns>
         private bool CanGenerateFile(string path)
         {
             if (Force.IsPresent || !File.Exists(path))
@@ -204,7 +204,7 @@ namespace ResourceGenerator
         /// </summary>
         /// <remarks>Only UTF-8 encoding is supported.</remarks>
         /// <param name="path">The file to create a dictionary.</param>
-        /// <returns>The dictionary created from the path parameter.</returns>
+        /// <returns>The dictionary created from the <paramref name="path"/> parameter.</returns>
         private IDictionary CreateDictionaryFromFile(string path)
         {
             char[] separator = new char[] { '=' };
@@ -369,7 +369,7 @@ namespace ResourceGenerator
         /// Resolves the specified path to a fully qualified path.
         /// </summary>
         /// <param name="path">The path to resolve.</param>
-        /// <returns>The fully qualified path of the path parameter.</returns>
+        /// <returns>The fully qualified path of the <paramref name="path"/> parameter.</returns>
         private string ResolveFilePath(string path)
         {
             try
